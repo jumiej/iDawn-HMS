@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FHIRPatient } from "../types/fhir";
-import { createPatient } from "../services/patientService";
+import { createPatient, updatePatient } from "../services/patientService";
 
 interface Props {
   onClose: () => void;
+  patient?: FHIRPatient;
 }
 
 const emptyForm = {
@@ -18,15 +19,49 @@ const emptyForm = {
   country: "NG",
 };
 
-export default function NewPatientsModal({ onClose }: Props) {
-  const [form, setForm] = useState(emptyForm);
+// Edit mode : Converting an existing patient into form state
+function patientToForm(patient: FHIRPatient): typeof emptyForm {
+  const name = patient.name?.[0];
+  const phone = patient.telecom?.find((t) => t.system === "phone")?.value ?? "";
+  const address = patient.address?.[0];
+  return {
+    firstName: name?.given?.[0] ?? "",
+    lastName: name?.family ?? "",
+    gender: patient.gender ?? "",
+    birthDate: patient.birthDate ?? "",
+    phone,
+    addressLine: address?.line?.[0] ?? "",
+    city: address?.city ?? "",
+    country: address?.country ?? "NG",
+  };
+}
+export default function NewPatientsModal({ onClose, patient }: Props) {
+  const isEditMode = !!patient;
+
+  const [form, setForm] = useState(
+    patient ? patientToForm(patient) : emptyForm,
+  );
   const [errors, setErrors] = useState<Partial<typeof emptyForm>>({});
 
   // queryClient lets us refetch the patients list after creating one
   const queryClient = useQueryClient();
 
+  useEffect(() => {
+    setForm(patient ? patientToForm(patient) : emptyForm);
+  }, [patient]);
+
   const mutation = useMutation({
-    mutationFn: (patient: Omit<FHIRPatient, "id">) => createPatient(patient),
+    mutationFn: (data: Omit<FHIRPatient, "id">) => {
+      if (isEditMode && patient?.id) {
+        // PUT requires the full resource including id and resourceType
+        return updatePatient(patient.id, {
+          ...data,
+          id: patient.id,
+          resourceType: "Patient",
+        });
+      }
+      return createPatient(data);
+    },
 
     onSuccess: () => {
       // This invalidates the 'patients' cache key — React Query refetches the list automatically
@@ -98,8 +133,14 @@ export default function NewPatientsModal({ onClose }: Props) {
       <div className="modal">
         <div className="modal-header">
           <div>
-            <div className="modal-title">New Patient</div>
-            <div className="modal-sub">Creates a FHIR Patient resource</div>
+            <div className="modal-title">
+              {isEditMode ? "Edit Patient" : "New Patient"}
+            </div>
+            <div className="modal-sub">
+              {isEditMode
+                ? `Updates Patient/${patient.id} via FHIR PUT`
+                : "Creates a FHIR Patient resource"}
+            </div>
           </div>
           <button className="close-btn" onClick={onClose}>
             ✕
@@ -216,7 +257,9 @@ export default function NewPatientsModal({ onClose }: Props) {
 
           {/* FHIR info box */}
           <div className="fhir-info-box">
-            <div className="fhir-info-title"> What gets sent to FHIR</div>
+            <div className="fhir-info-title">
+              {isEditMode ? `PUT / Patient/${patient.id}` : "POST / patient"}
+            </div>
             <pre className="fhir-info-code">
               {JSON.stringify(
                 {
@@ -265,13 +308,19 @@ export default function NewPatientsModal({ onClose }: Props) {
             onClick={handleSubmit}
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? "Saving to FHIR..." : "Create Patient"}
+            {mutation.isPending
+              ? "Saving to FHIR..."
+              : isEditMode
+                ? "Save Changes"
+                : "Create Patient"}
           </button>
         </div>
 
         {mutation.isError && (
           <div className="mutation-error">
-            Failed to create patient. Is your FHIR server running?
+            {isEditMode
+              ? "Failed to update patient."
+              : "Failed to create patient."}
           </div>
         )}
       </div>

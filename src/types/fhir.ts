@@ -36,3 +36,29 @@ export interface FHIRPatient extends FHIRResource {
   }>;
   active?: boolean;
 }
+
+export interface FHIREncounter extends FHIRResource {
+  resourceType: "Encounter";
+  status: "planned" | "in-progress" | "finished" | "cancelled";
+  class: {
+    system?: string;
+    code: string;
+    display: string;
+  };
+  subject: {
+    reference: string;
+    display: string;
+  };
+  participant?: Array<{
+    individual?: {
+      display: string;
+    };
+  }>;
+  period?: {
+    start: string;
+    end?: string;
+  };
+  reasonCode?: Array<{
+    text: string;
+  }>;
+}

@@ -1,12 +1,18 @@
 import { FHIRPatient } from "../types/fhir";
 import { getPatientName } from "../pages/patientsPage";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  deactivatePatient,
+  reactivatePatient,
+} from "../services/patientService";
 
 interface Props {
   patient: FHIRPatient;
   onClose: () => void;
+  onEdit: (patient: FHIRPatient) => void;
 }
 
-export default function PatientDetail({ patient, onClose }: Props) {
+export default function PatientDetail({ patient, onClose, onEdit }: Props) {
   const name = getPatientName(patient);
   const initials = name
     .split(" ")
@@ -19,6 +25,19 @@ export default function PatientDetail({ patient, onClose }: Props) {
   const addressText = address
     ? `${address.line?.[0] ?? ""} ${address.city ?? ""} ${address.country ?? ""}`.trim()
     : "No address";
+
+  const queryClient = useQueryClient();
+
+  const isActive = patient.active !== false;
+
+  const toggleMutation = useMutation({
+    mutationFn: () =>
+      isActive ? deactivatePatient(patient) : reactivatePatient(patient),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["patients"] });
+    },
+  });
+
   return (
     <div className="detail-panel">
       {/* Header */}
@@ -40,6 +59,26 @@ export default function PatientDetail({ patient, onClose }: Props) {
         >
           {patient.active === false ? "Inactive" : "Active"}
         </span>
+      </div>
+      {/* Action buttons — NEW */}
+      <div className="detail-actions">
+        <button
+          className="btn-secondary btn-sm"
+          onClick={() => onEdit(patient)}
+        >
+          Edit
+        </button>
+        <button
+          className={`btn-sm ${isActive ? "btn-danger" : "btn-success"}`}
+          onClick={() => toggleMutation.mutate()}
+          disabled={toggleMutation.isPending}
+        >
+          {toggleMutation.isPending
+            ? "Updating..."
+            : isActive
+              ? "Deactivate"
+              : "Reactivate"}
+        </button>
       </div>
       {/* Demographics */}
       <div className="detail-section">

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPatients } from "../services/patientService";
 import { FHIRPatient } from "../types/fhir";
 import PatientDetail from "../components/patientDetail";
-import NewPatientsModal from "../components/NewPatientsModal";
+import NewPatientsModal from "../components/PatientsFormModal";
 
 // Helper: pull full name out of FHIR name array
 export function getPatientName(patient: FHIRPatient): string {
@@ -28,6 +28,9 @@ export default function PatientsPage() {
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [editingPatient, setEditingPatient] = useState<FHIRPatient | undefined>(
+    undefined,
+  );
 
   // This calls getPatients() and manages loading/error/data automatically
   const {
@@ -44,6 +47,16 @@ export default function PatientsPage() {
     getPatientName(p).toLocaleLowerCase().includes(search.toLowerCase()),
   );
 
+  function handleEdit(patient: FHIRPatient) {
+    setEditingPatient(patient);
+    setShowModal(true);
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
+    setEditingPatient(undefined);
+  }
+
   const activeCount = patients.filter((p) => p.active !== false).length;
   return (
     <div className="page-with-detail">
@@ -56,7 +69,7 @@ export default function PatientsPage() {
           <button
             className="btn-primary"
             onClick={() => {
-              console.log("You clicked me");
+              setEditingPatient(undefined);
               setShowModal(true);
             }}
           >
@@ -171,9 +184,12 @@ export default function PatientsPage() {
         <PatientDetail
           patient={patients.find((p) => p.id === selectedId)!}
           onClose={() => setSelectedId(null)}
+          onEdit={handleEdit}
         />
       )}
-      {showModal && <NewPatientsModal onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <NewPatientsModal onClose={handleCloseModal} patient={editingPatient} />
+      )}
     </div>
   );
 }

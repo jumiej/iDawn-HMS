@@ -16,7 +16,6 @@ export async function getPatients(): Promise<FHIRPatient[]> {
   const response = await fhirClient.get<FHIRBundle<FHIRPatient>>(
     "/Patient?_count=50&_sort=-_lastUpdated",
   );
-  // console.log("====response====", response);
   return response.data.entry?.map((entry) => entry.resource) ?? [];
 }
 
@@ -40,5 +39,34 @@ export async function updatePatient(
   patient: FHIRPatient,
 ): Promise<FHIRPatient> {
   const response = await fhirClient.put<FHIRPatient>(`/Patient/${id}`, patient);
+  return response.data;
+}
+
+// Soft delete — FHIR convention. Healthcare records are never truly deleted,
+// they're marked inactive to preserve the audit trail.
+
+export async function deactivatePatient(
+  patient: FHIRPatient,
+): Promise<FHIRPatient> {
+  const updated: FHIRPatient = { ...patient, active: false };
+  return updatePatient(patient.id!, updated);
+}
+
+export async function reactivatePatient(
+  patient: FHIRPatient,
+): Promise<FHIRPatient> {
+  const updated: FHIRPatient = { ...patient, active: true };
+  return updatePatient(patient.id!, updated);
+}
+
+// Put Update an existing patient
+export async function getAllEncounters(
+  id: string,
+  patient: FHIRPatient,
+): Promise<FHIRPatient> {
+  const response = await fhirClient.put<FHIRPatient>(
+    `/encountersPage/${id}`,
+    patient,
+  );
   return response.data;
 }
