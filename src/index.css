@@ -63,7 +63,8 @@ nav {
   gap: 8px;
   padding: 8px 12px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   color: #6b7280;
   text-decoration: none;
   transition: background 0.15s;
@@ -261,7 +262,6 @@ tbody td {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  /* border: 2px solid green; */
 }
 
 .page-body {
@@ -516,7 +516,7 @@ tbody td {
 .detail-actions {
   display: flex;
   gap: 8px;
-  padding: 0 16px 16px 16px;
+  padding: 16px;
   border-bottom: 1px solid #e5e7eb;
 }
 
