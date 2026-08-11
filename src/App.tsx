@@ -1,13 +1,18 @@
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
-import PatientsPage from "./pages/patientsPage";
+import PatientsPage from "./pages/PatientsPage";
+import EncountersPage from "./pages/EncounterPage";
+import ObservationsPage from "./pages/ObservationsPage";
 import "./index.css";
 import WaterSun from "../src/Images/WaterSun.svg";
-import EncountersPage from "./pages/encounterPage";
 import Users from "../src/Images/UsersRounded.svg";
 import CalendarAdd from "../src/Images/CalendarAdd.svg";
 import stethoscope from "../src/Images/Stethoscope.svg";
-import Chart from "../src/Images/Chart.svg";
+import Hospital from "../src/Images/Hospital.svg";
 import Pill from "../src/Images/Pill.svg";
+import observation from "../src/Images/observation.svg";
+import MedicationsPage from "./pages/MedicationsPage";
+import AppointmentsPage from "./pages/AppointmentsPage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
@@ -23,6 +28,15 @@ function App() {
             </div>
           </div>
           <nav>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              <img src={Hospital} alt="Hospital" />
+              Dashboard
+            </NavLink>
             <NavLink
               to="/patients"
               className={({ isActive }) =>
@@ -56,7 +70,7 @@ function App() {
                 isActive ? "nav-item active" : "nav-item"
               }
             >
-              <img src={Chart} alt="Chart" />
+              <img src={observation} alt="observation" />
               Observations
             </NavLink>
             <NavLink
@@ -73,9 +87,13 @@ function App() {
 
         <main className="main-content">
           <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/patients" element={<PatientsPage />} />
-            <Route path="/" element={<PatientsPage />} />
             <Route path="/encounters" element={<EncountersPage />} />
+            <Route path="/observations" element={<ObservationsPage />} />
+            <Route path="/medications" element={<MedicationsPage />} />
+            <Route path="/appointments" element={<AppointmentsPage />} />
           </Routes>
         </main>
       </div>

@@ -187,8 +187,6 @@ export default function NewPatientsModal({ onClose, patient }: Props) {
                 <option value="">Select...</option>
                 <option value="female">Female</option>
                 <option value="male">Male</option>
-                <option value="other">Other</option>
-                <option value="unknown">Unknown</option>
               </select>
               {errors.gender && (
                 <span className="error-msg">{errors.gender}</span>

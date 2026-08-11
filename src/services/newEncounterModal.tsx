@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FHIREncounter } from "../types/fhir";
 import { getPatients } from "../services/patientService";
 
-import { getPatientName } from "../pages/patientsPage";
+import { getPatientName } from "../pages/PatientsPage";
 import { createEncounter } from "./encounterService";
 
 interface Props {
