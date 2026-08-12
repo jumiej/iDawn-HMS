@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
-import PatientsPage from "./pages/PatientsPage";
+// import PatientsPage from "./pages/PatientsPage";
 import EncounterPage from "./pages/EncounterPage";
 import ObservationsPage from "./pages/ObservationsPage";
 import "./index.css";
@@ -20,7 +20,6 @@ function App() {
       <div className="app-shell">
         <aside className="sidebar">
           <div className="logo">
-            {/* <span className="logo-icon">🌅</span> */}
             <img src={WaterSun} alt="WaterSun" />
             <div>
               <div className="logo-name">iDawn</div>
@@ -89,7 +88,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/patients" element={<PatientsPage />} />
+            {/* <Route path="/patients" element={<PatientsPage />} /> */}
             <Route path="/encounters" element={<EncounterPage />} />
             <Route path="/observations" element={<ObservationsPage />} />
             <Route path="/medications" element={<MedicationsPage />} />
