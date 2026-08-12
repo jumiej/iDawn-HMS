@@ -4,7 +4,7 @@ import { FHIREncounter } from "../types/fhir";
 import { getPatients } from "../services/patientService";
 
 import { getPatientName } from "../pages/PatientsPage";
-import { createEncounter } from "./encounterService";
+import { createEncounter } from "../services/encounterService";
 
 interface Props {
   onClose: () => void;

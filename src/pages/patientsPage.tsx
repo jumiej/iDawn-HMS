@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getPatients } from "../services/patientService";
 import { FHIRPatient } from "../types/fhir";
-import PatientDetail from "../components/patientDetail";
+import PatientDetail from "../components/PatientDetail";
 import NewPatientsModal from "../components/PatientsFormModal";
 
 // Helper: pull full name out of FHIR name array

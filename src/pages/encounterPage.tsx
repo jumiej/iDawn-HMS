@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FHIREncounter } from "../types/fhir";
 import { getAllEncounters } from "../services/encounterService";
-import NewEncounterModal from "../services/newEncounterModal";
+import NewEncounterModal from "../components/newEncounterModal";
 import EncounterDetail from "../components/encounterDetails";
 
 export default function EncounterPage() {

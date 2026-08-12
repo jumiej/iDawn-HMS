@@ -9,9 +9,6 @@ import linearStethoscope from "../../src/Images/linearStethoscope.svg";
 import linearPill from "../../src/Images/linearPill.svg";
 import linearObservation from "../../src/Images/linearObservation.svg";
 import linearUsers from "../../src/Images/linearUsers.svg";
-// import linearCalendar from "../../src/Images/linearCalendar.svg";
-
-// import { getPatientName } from "./PatientsPage";
 
 function formatDate(iso?: string): string {
   if (!iso) return "—";
