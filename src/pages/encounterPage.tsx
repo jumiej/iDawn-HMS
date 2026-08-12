@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FHIREncounter } from "../types/fhir";
 import { getAllEncounters } from "../services/encounterService";
-import NewEncounterModal from "../components/newEncounterModal";
-import EncounterDetail from "../components/encounterDetails";
+import NewEncounterModal from "../components/NewEncounterModal";
+import EncounterDetail from "../components/EncounterDetail";
 
 export default function EncounterPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
