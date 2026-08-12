@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import PatientsPage from "./pages/PatientsPage";
-import EncountersPage from "./pages/EncounterPage";
+import EncounterPage from "./pages/EncounterPage";
 import ObservationsPage from "./pages/ObservationsPage";
 import "./index.css";
 import WaterSun from "../src/Images/WaterSun.svg";
@@ -90,7 +90,7 @@ function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/patients" element={<PatientsPage />} />
-            <Route path="/encounters" element={<EncountersPage />} />
+            <Route path="/encounters" element={<EncounterPage />} />
             <Route path="/observations" element={<ObservationsPage />} />
             <Route path="/medications" element={<MedicationsPage />} />
             <Route path="/appointments" element={<AppointmentsPage />} />

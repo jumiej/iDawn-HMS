@@ -5,7 +5,7 @@ import { getAllEncounters } from "../services/encounterService";
 import NewEncounterModal from "../services/newEncounterModal";
 import EncounterDetail from "../components/encounterDetails";
 
-export default function EncountersPage() {
+export default function EncounterPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
