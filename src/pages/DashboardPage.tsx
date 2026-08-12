@@ -268,7 +268,7 @@ export default function DashboardPage() {
                     {enc.subject.display ?? enc.subject.reference.split("/")[1]}
                   </div>
                   <div className="dash-item-sub">
-                    {enc.class.display}
+                    {enc.class?.display}
                     {enc.reasonCode?.[0]?.text
                       ? ` · ${enc.reasonCode[0].text}`
                       : ""}
@@ -310,12 +310,13 @@ export default function DashboardPage() {
               <div key={med.id} className="dash-list-item">
                 <div className="dash-item-left">
                   <div className="dash-item-name">
-                    {med.medicationCodeableConcept.coding[0]?.display}
+                    {med.medicationCodeableConcept?.coding?.[0]?.display}
                   </div>
                   <div className="dash-item-sub">
-                    {med.subject.display ?? med.subject.reference.split("/")[1]}
+                    {med.subject?.display ??
+                      med.subject?.reference?.split("/")[1]}
                     {med.requester?.display
-                      ? ` · ${med.requester.display}`
+                      ? ` · ${med.requester?.display}`
                       : ""}
                   </div>
                 </div>
@@ -328,7 +329,7 @@ export default function DashboardPage() {
                       borderRadius: "4px",
                     }}
                   >
-                    {med.medicationCodeableConcept.coding[0]?.code}
+                    {med.medicationCodeableConcept?.coding?.[0]?.code}
                   </code>
                 </div>
               </div>
@@ -351,7 +352,7 @@ export default function DashboardPage() {
               <div key={obs.id} className="dash-list-item">
                 <div className="dash-item-left">
                   <div className="dash-item-name">
-                    {obs.code.coding[0]?.display}
+                    {obs.code?.coding[0]?.display}
                   </div>
                   <div className="dash-item-sub">
                     {obs.subject.display ?? obs.subject.reference.split("/")[1]}

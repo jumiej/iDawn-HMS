@@ -302,7 +302,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
             encounters.map((enc) => (
               <div key={enc.id} className="enc-list-item">
                 <div className="enc-list-top">
-                  <span className="enc-list-type">{enc.class.display}</span>
+                  <span className="enc-list-type">{enc.class?.display}</span>
                   <StatusBadge status={enc.status} />
                 </div>
                 {enc.reasonCode?.[0]?.text && (
@@ -367,7 +367,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
               <div key={obs.id} className="enc-list-item">
                 <div className="enc-list-top">
                   <span className="enc-list-type">
-                    {obs.code.coding[0]?.display ?? "Unknown"}
+                    {obs.code?.coding[0]?.display ?? "Unknown"}
                   </span>
                   <span>
                     <strong>{obs.valueQuantity?.value}</strong>
@@ -391,7 +391,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
                       borderRadius: "4px",
                     }}
                   >
-                    {obs.code.coding[0]?.code}
+                    {obs.code?.coding?.[0]?.code}
                   </code>
                   <span>
                     <img src={clock} alt="Clock" className="linearIcons" />{" "}
@@ -445,7 +445,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
                 <div className="enc-list-top">
                   <span className="enc-list-type">
                     <img src={linearPill} alt="Pill" className="linearIcons" />
-                    {med.medicationCodeableConcept.coding[0]?.display}
+                    {med.medicationCodeableConcept?.coding?.[0]?.display}
                   </span>
                   <span
                     className={`badge ${
@@ -482,7 +482,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
                       borderRadius: "4px",
                     }}
                   >
-                    {med.medicationCodeableConcept.coding[0]?.code}
+                    {med.medicationCodeableConcept?.coding?.[0]?.code}
                   </code>
                 </div>
                 {med.note?.[0]?.text && (

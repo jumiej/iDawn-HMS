@@ -153,7 +153,7 @@ export default function EncountersPage() {
                       {enc.subject.display ??
                         enc.subject.reference.split("/")[1]}
                     </td>
-                    <td>{enc.class.display}</td>
+                    <td>{enc.class?.display}</td>
                     <td>
                       <span className={`badge ${statusBadgeClass(enc.status)}`}>
                         {enc.status}

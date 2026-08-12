@@ -157,7 +157,7 @@ export default function MedicationsPage() {
                         alt="Pill"
                         className="linearIcons"
                       />
-                      {med.medicationCodeableConcept.coding[0]?.display}
+                      {med.medicationCodeableConcept?.coding?.[0]?.display}
                     </div>
                   </td>
                   <td>
@@ -169,7 +169,7 @@ export default function MedicationsPage() {
                         borderRadius: "4px",
                       }}
                     >
-                      {med.medicationCodeableConcept.coding[0]?.code}
+                      {med.medicationCodeableConcept?.coding?.[0]?.code}
                     </code>
                   </td>
                   <td
@@ -179,7 +179,7 @@ export default function MedicationsPage() {
                       color: "#6b7280",
                     }}
                   >
-                    {med.subject.display ?? med.subject.reference.split("/")[1]}
+                    {med.subject?.display ?? med.subject?.reference?.split("/")[1]}
                   </td>
                   <td style={{ fontSize: "12px", maxWidth: "180px" }}>
                     {med.dosageInstruction?.[0]?.text ?? "—"}

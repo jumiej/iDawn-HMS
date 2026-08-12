@@ -197,7 +197,7 @@ export default function NewObservationModal({
               <option value="">No encounter selected</option>
               {encounters.map((enc) => (
                 <option key={enc.id} value={enc.id}>
-                  {enc.class.display} —{" "}
+                  {enc.class?.display} —{" "}
                   {enc.reasonCode?.[0]?.text ?? enc.status} ({enc.id})
                 </option>
               ))}

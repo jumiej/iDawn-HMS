@@ -1,7 +1,8 @@
 import axios from "axios";
 import { FHIRBundle, FHIREncounter } from "../types/fhir";
 
-const FHIR_BASE = "http://localhost:8080/fhir";
+const FHIR_BASE =
+  process.env.REACT_APP_FHIR_BASE_URL ?? "http://localhost:8080/fhir";
 
 const fhirClient = axios.create({
   baseURL: FHIR_BASE,

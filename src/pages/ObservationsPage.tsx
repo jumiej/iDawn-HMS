@@ -51,7 +51,7 @@ export default function ObservationsPage() {
   });
 
   const filtered = observations.filter((o) =>
-    filterCode === "all" ? true : o.code.coding[0]?.code === filterCode,
+    filterCode === "all" ? true : o.code?.coding?.[0]?.code === filterCode,
   );
 
   return (
@@ -75,7 +75,7 @@ export default function ObservationsPage() {
         <div className="stat-card">
           <div className="stat-label">Vital Types</div>
           <div className="stat-value">
-            {new Set(observations.map((o) => o.code.coding[0]?.code)).size}
+            {new Set(observations.map((o) => o.code?.coding?.[0]?.code)).size}
           </div>
         </div>
         <div className="stat-card">
@@ -149,7 +149,7 @@ export default function ObservationsPage() {
                   <td>
                     <div className="cell-flex">
                       <span style={{ fontSize: "18px" }}>
-                        {getVitalIcon(obs.code.coding[0]?.code ?? "")}
+                        {getVitalIcon(obs.code?.coding[0]?.code ?? "")}
                       </span>
                       {getVitalDisplay(obs)}
                     </div>
@@ -163,7 +163,7 @@ export default function ObservationsPage() {
                         borderRadius: "4px",
                       }}
                     >
-                      {obs.code.coding[0]?.code}
+                      {obs.code?.coding?.[0]?.code}
                     </code>
                   </td>
                   <td>
