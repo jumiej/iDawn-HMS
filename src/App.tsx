@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
-// import PatientsPage from "./pages/PatientsPage";
 import EncounterPage from "./pages/EncounterPage";
 import ObservationsPage from "./pages/ObservationsPage";
 import "./index.css";
@@ -13,6 +12,7 @@ import observation from "../src/Images/observation.svg";
 import MedicationsPage from "./pages/MedicationsPage";
 import AppointmentsPage from "./pages/AppointmentsPage";
 import DashboardPage from "./pages/DashboardPage";
+import PatientsPage from "./pages/PatientsPage";
 
 function App() {
   return (
@@ -88,7 +88,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            {/* <Route path="/patients" element={<PatientsPage />} /> */}
+            <Route path="/patients" element={<PatientsPage />} />
             <Route path="/encounters" element={<EncounterPage />} />
             <Route path="/observations" element={<ObservationsPage />} />
             <Route path="/medications" element={<MedicationsPage />} />
