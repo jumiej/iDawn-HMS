@@ -149,7 +149,7 @@ export default function ObservationsPage() {
                   <td>
                     <div className="cell-flex">
                       <span style={{ fontSize: "18px" }}>
-                        {getVitalIcon(obs.code?.coding[0]?.code ?? "")}
+                        {getVitalIcon(obs.code?.coding?.[0]?.code ?? "")}
                       </span>
                       {getVitalDisplay(obs)}
                     </div>
