@@ -262,7 +262,7 @@ export default function DashboardPage() {
               <div key={enc.id} className="dash-list-item">
                 <div className="dash-item-left">
                   <div className="dash-item-name">
-                    {enc.subject.display ?? enc.subject.reference.split("/")[1]}
+                    {enc.subject?.display ?? enc.subject?.reference?.split("/")[1]}
                   </div>
                   <div className="dash-item-sub">
                     {enc.class?.display}
@@ -349,10 +349,10 @@ export default function DashboardPage() {
               <div key={obs.id} className="dash-list-item">
                 <div className="dash-item-left">
                   <div className="dash-item-name">
-                    {obs.code?.coding[0]?.display}
+                    {obs.code?.coding?.[0]?.display}
                   </div>
                   <div className="dash-item-sub">
-                    {obs.subject.display ?? obs.subject.reference.split("/")[1]}
+                    {obs.subject?.display ?? obs.subject?.reference?.split("/")[1]}
                   </div>
                 </div>
                 <div className="dash-item-right">

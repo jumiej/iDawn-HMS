@@ -10,7 +10,7 @@ import diaphram from "../../src/Images/diaphram.png";
 import balance from "../../src/Images/balance.png";
 
 function getVitalDisplay(obs: FHIRObservation): string {
-  return obs.code.coding[0]?.display ?? "Unknown";
+  return obs.code?.coding?.[0]?.display ?? "Unknown";
 }
 
 function getVitalIcon(code: string): React.ReactNode {
@@ -185,10 +185,10 @@ export default function ObservationsPage() {
                       color: "#6b7280",
                     }}
                   >
-                    {obs.subject.display ?? obs.subject.reference.split("/")[1]}
+                    {obs.subject?.display ?? obs.subject?.reference?.split("/")[1]}
                   </td>
                   <td style={{ fontSize: "12px", color: "#6b7280" }}>
-                    {obs.encounter?.reference.split("/")[1] ?? "—"}
+                    {obs.encounter?.reference?.split("/")[1] ?? "—"}
                   </td>
                   <td style={{ fontSize: "12px" }}>
                     {formatDate(obs.effectiveDateTime)}

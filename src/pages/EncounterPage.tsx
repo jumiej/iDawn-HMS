@@ -150,8 +150,8 @@ export default function EncounterPage() {
                     onClick={() => setSelectedId(enc.id ?? null)}
                   >
                     <td style={{ fontFamily: "monospace", fontSize: "12px" }}>
-                      {enc.subject.display ??
-                        enc.subject.reference.split("/")[1]}
+                      {enc.subject?.display ??
+                        enc.subject?.reference?.split("/")[1]}
                     </td>
                     <td>{enc.class?.display}</td>
                     <td>

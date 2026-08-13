@@ -367,7 +367,7 @@ export default function PatientDetail({ patient, onClose, onEdit }: Props) {
               <div key={obs.id} className="enc-list-item">
                 <div className="enc-list-top">
                   <span className="enc-list-type">
-                    {obs.code?.coding[0]?.display ?? "Unknown"}
+                    {obs.code?.coding?.[0]?.display ?? "Unknown"}
                   </span>
                   <span>
                     <strong>{obs.valueQuantity?.value}</strong>
