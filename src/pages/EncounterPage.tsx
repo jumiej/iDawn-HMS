@@ -131,6 +131,7 @@ export default function EncounterPage() {
           )}
 
           {!isLoading && !isError && filtered.length > 0 && (
+            <div className="table-scroll">
             <table>
               <thead>
                 <tr>
@@ -170,6 +171,7 @@ export default function EncounterPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>

@@ -145,6 +145,7 @@ export default function AppointmentsPage() {
         )}
 
         {!isLoading && !isError && filtered.length > 0 && (
+          <div className="table-scroll">
           <table>
             <thead>
               <tr>
@@ -220,6 +221,7 @@ export default function AppointmentsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

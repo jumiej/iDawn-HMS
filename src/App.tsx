@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import EncounterPage from "./pages/EncounterPage";
 import ObservationsPage from "./pages/ObservationsPage";
@@ -15,10 +16,32 @@ import DashboardPage from "./pages/DashboardPage";
 import PatientsPage from "./pages/PatientsPage";
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <div className="app-shell">
-        <aside className="sidebar">
+        <div className="mobile-topbar">
+          <button
+            className="hamburger-btn"
+            aria-label="Toggle navigation"
+            onClick={() => setSidebarOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <div className="logo-name">iDawn</div>
+        </div>
+
+        {sidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        <aside className={sidebarOpen ? "sidebar open" : "sidebar"}>
           <div className="logo">
             <img src={WaterSun} alt="WaterSun" />
             <div>
@@ -26,7 +49,7 @@ function App() {
               <div className="logo-sub">HMS · FHIR R4</div>
             </div>
           </div>
-          <nav>
+          <nav onClick={() => setSidebarOpen(false)}>
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>

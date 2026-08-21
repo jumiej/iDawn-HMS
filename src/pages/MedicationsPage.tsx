@@ -134,6 +134,7 @@ export default function MedicationsPage() {
         )}
 
         {!isLoading && !isError && filtered.length > 0 && (
+          <div className="table-scroll">
           <table>
             <thead>
               <tr>
@@ -229,6 +230,7 @@ export default function MedicationsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

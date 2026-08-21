@@ -131,6 +131,7 @@ export default function ObservationsPage() {
         )}
 
         {!isLoading && !isError && filtered.length > 0 && (
+          <div className="table-scroll">
           <table>
             <thead>
               <tr>
@@ -204,6 +205,7 @@ export default function ObservationsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

@@ -125,6 +125,7 @@ export default function PatientsPage() {
           )}
 
           {!isLoading && !isError && (
+            <div className="table-scroll">
             <table>
               <thead>
                 <tr>
@@ -175,6 +176,7 @@ export default function PatientsPage() {
                 })}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>
